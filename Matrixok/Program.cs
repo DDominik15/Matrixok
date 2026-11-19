@@ -1,33 +1,37 @@
-﻿namespace Matrixok
+﻿using System.Numerics;
+
+namespace Matrixok
 {
     internal class Program
     {
         static int sorokszama = 10;
         static int oszlopokSzama = 6;
         static int[,] szamokMatrix = new int[sorokszama, oszlopokSzama];
+        static int[,] negyzetesMatrix = new int[10, 10];
         static Random r = new Random();
-        static void F01()
+        static void F01(int[,] matrix, int min, int max)
         {
-            for (int i = 0; i < sorokszama; i++)
+            for (int i = 0; i < matrix.GetLength(0); i++)
             {
-                for (int j = 0; j < oszlopokSzama; j++)
+                for (int j = 0; j < matrix.GetLength(1); j++)
                 {
-                    szamokMatrix[i, j] = r.Next(10, 100);
+                    matrix[i, j] = r.Next(min, max+1);
                 }
             }
-
+            
         }
 
-        static void F02()
+        static void F02(int[,] matrix)
         {
-            for (int i = 0; i < sorokszama; i++)
+            for (int i = 0; i < matrix.GetLength(0); i++)
             {
-                for (int j = 0; j < oszlopokSzama; j++)
+                for (int j = 0; j < matrix.GetLength(1); j++)
                 {
-                    Console.Write(szamokMatrix[i, j] + " ");
+                    Console.Write($"{matrix[i, j], 5}");
                 }
                 Console.WriteLine();
             }
+            Console.WriteLine();
         }
         
         static void F03()
@@ -70,14 +74,45 @@
             }
             Console.WriteLine();
         }
+        static void BalAtloSum(int[,] matrix)
+        {
+            int sum = 0;
+            Console.Write("Az átlo: ");
+            for (int i = 0; i < matrix.GetLength(0); i++)
+            {
+                sum += matrix[i, i];
+                Console.Write($"{matrix[i, i], 5}");
+            }
+            Console.WriteLine();
+            Console.WriteLine("A mátrix bal átlojának összege: " + sum);
+        }
+        static void JobbAtloSum(int[,] matrix)
+        {
+            int sum = 0;
+            Console.Write("Az átlo: ");
+            int j = matrix.GetLength(1) - 1;
+            for (int i = 0; i < matrix.GetLength(0) ; i++)
+            {
+                sum += matrix[i, j];
+                Console.Write($"{matrix[i, j],5}");
+                j--;
 
+            }
+            Console.WriteLine();
+            Console.WriteLine("A mátrix bal átlojának összege: " + sum);
+        }
         static void Main(string[] args)
         {
-            F01();
-            F02();
-            F03();
-            F04();
-            F05();
+            //F01(szamokMatrix, 10, 99);
+            //F02(szamokMatrix);
+            //F03();
+            //F04();
+            //F05();
+            //Console.WriteLine("----------------------------------------------");
+            F01(negyzetesMatrix, -100, 100);
+            F02(negyzetesMatrix);
+            BalAtloSum(negyzetesMatrix);
+            JobbAtloSum(negyzetesMatrix);
         }
     }
 }
