@@ -120,6 +120,8 @@ namespace Matrixok
             F02(masolat);
             Console.WriteLine("A negzyetes martix: ");
             F02(negyzetesMatrix);
+
+            
         }
     }
 }
