@@ -29,6 +29,34 @@ namespace Ijaszverseny
             }
             return matrix;
         }
+
+        static void NyertesHirdetes(int[,] matrix, string[] nevek)
+        {
+            int winningIndex = -1;
+            int winningSum = -1;
+            for (int i = 0; i < matrix.GetLength(0); i++)
+            {
+                int sum = 0;
+                for (int j = 0; j < matrix.GetLength(1); j++)
+                {
+                    sum += matrix[i, j];
+                }
+
+                if (sum > winningSum)
+                {
+                    winningSum = sum;
+                    winningIndex = i;
+                }
+            }
+
+            if (winningIndex == -1 || winningSum == -1)
+            {
+                Console.WriteLine("Hiba tortént a nyertes számitása közben!");
+                return;
+            }
+            Console.WriteLine();
+            Console.WriteLine($"Nyertes jatekos: jatekos azonosito: {winningIndex + 1} | Név: {nevek[winningIndex]} | pontszám: {winningSum}");
+        }
         static void Main(string[] args)
         {
             Console.Write("Játékosok száma: ");
@@ -39,37 +67,18 @@ namespace Ijaszverseny
             {
                 Console.WriteLine(item);
             }
-            int winningIndex = -1;
-            int winningSum = -1;
             for (int i = 0; i < jatekosok.GetLength(0); i++)
             {
-                int sum = 0;
                 Console.WriteLine();
+                Console.Write($"A(z) {i + 1}. játékos: {nevek[i],-8} pontjai: ");
                 for (int j = 0; j < jatekosok.GetLength(1); j++)
                 {
-                    Console.Write($"A(z) {i+1}. játékos: {nevek[i]} pontjai: ");
-                    Console.Write($"{jatekosok[i, j],5}");
-                    Console.WriteLine();
 
-                    sum += jatekosok[i, j];
-                    
+                    Console.Write($"{jatekosok[i, j],3}");
                 }
-
-                if (sum > winningSum)
-                {
-                    winningSum = sum;
-                    winningIndex = i;
-                }
-
+                Console.WriteLine();
             }
-            
-            if (winningIndex == -1 || winningSum == -1)
-            {
-                Console.WriteLine("Hiba tortént!");
-                return;
-            }
-
-            Console.WriteLine($"Nyertes jatekos: {nevek[winningIndex]} ponszáma: {winningSum}");
+            NyertesHirdetes(jatekosok, nevek);
         }
     }
 }
