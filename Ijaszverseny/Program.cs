@@ -55,7 +55,9 @@ namespace Ijaszverseny
                 return;
             }
             Console.WriteLine();
+            Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine($"Nyertes jatekos: jatekos azonosito: {winningIndex + 1} | Név: {nevek[winningIndex]} | pontszám: {winningSum}");
+            Console.ForegroundColor = ConsoleColor.White;
         }
         static void Main(string[] args)
         {
