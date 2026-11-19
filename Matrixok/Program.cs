@@ -7,7 +7,7 @@ namespace Matrixok
         static int sorokszama = 10;
         static int oszlopokSzama = 6;
         static int[,] szamokMatrix = new int[sorokszama, oszlopokSzama];
-        static int[,] negyzetesMatrix = new int[10, 10];
+        static int[,] negyzetesMatrix = new int[5, 5];
         static Random r = new Random();
         static void F01(int[,] matrix, int min, int max)
         {
@@ -109,10 +109,17 @@ namespace Matrixok
             //F04();
             //F05();
             //Console.WriteLine("----------------------------------------------");
-            F01(negyzetesMatrix, -100, 100);
+            F01(negyzetesMatrix, 1, 9);
             F02(negyzetesMatrix);
             BalAtloSum(negyzetesMatrix);
             JobbAtloSum(negyzetesMatrix);
+
+            int[,] masolat = negyzetesMatrix;
+            masolat[0, 0] = 100;
+            Console.WriteLine("A masolat elemei: ");
+            F02(masolat);
+            Console.WriteLine("A negzyetes martix: ");
+            F02(negyzetesMatrix);
         }
     }
 }
